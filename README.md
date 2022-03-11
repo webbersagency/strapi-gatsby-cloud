@@ -13,7 +13,6 @@ module.exports = {
   ...
   'gatsby-cloud': {
     enabled: true,
-    resolve: '@relate-app/strapi-gatsby-cloud',
     config: {
       uploads: true,
       collectionTypes: [
