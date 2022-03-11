@@ -1,0 +1,27 @@
+{
+  "name": "@relate-app/strapi-gatsby-cloud",
+  "version": "1.0.0",
+  "description": "Syncing content with Gatsby Cloud.",
+  "strapi": {
+    "displayName": "Gatsby Cloud",
+    "name": "gatsby-cloud",
+    "description": "Syncing content with Gatsby Cloud.",
+    "kind": "plugin"
+  },
+  "dependencies": {
+    "@strapi/design-system": "^0.0.1-alpha.78",
+    "@strapi/helper-plugin": "^4.1.3",
+    "@strapi/icons": "^0.0.1-alpha.78",
+    "axios": "^0.26.1",
+    "debounce": "^1.2.1",
+    "node-fetch": "^3.2.2",
+    "react": "^17.0.2",
+    "react-intl": "^5.24.6"
+  },
+  "author": "Tim Brandin <tim.brandin@gmail.com>",
+  "engines": {
+    "node": ">=12.x. <=16.x.x",
+    "npm": ">=6.0.0"
+  },
+  "license": "MIT"
+}
