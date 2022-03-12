@@ -1,15 +1,26 @@
 'use strict';
-const fetch = require('node-fetch');
-const debounce = require('debounce');
+const fetch = require('cross-fetch');
+const throttle = require('throttle-debounce').throttle;
 
-const trigger = debounce((url, strapi) => {
+const triggerBuild = throttle(1000, strapi => {
   const { config } = strapi.plugin('gatsby-cloud');
   const headers = config('headers');
+  const url = config('buildWebhookUrl');
   fetch(url, {
     method: 'POST',
     ...headers && { headers },
   });
-}, 1000);
+});
+
+const triggerPreview = throttle(1000, strapi => {
+  const { config } = strapi.plugin('gatsby-cloud');
+  const headers = config('headers');
+  const url = config('previewWebhookUrl');
+  fetch(url, {
+    method: 'POST',
+    ...headers && { headers },
+  });
+});
 
 module.exports = ({ strapi }) => {
   const { config } = strapi.plugin('gatsby-cloud');
@@ -31,9 +42,9 @@ module.exports = ({ strapi }) => {
       case 'afterDeleteMany':
         const uid = event.model.uid;
         if (types.includes(uid)) {
-          trigger(config('previewWebhookUrl'), strapi);
+          triggerPreview(strapi);
           if (typeof event?.result?.publishedAt === 'string') {
-            trigger(config('buildWebhookUrl'), strapi);
+            triggerBuild(strapi);
           }
         }
         break;
