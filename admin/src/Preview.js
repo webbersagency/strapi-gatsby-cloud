@@ -27,7 +27,7 @@ const Preview = () => {
   const { modifiedData, layout } = useCMEditViewDataManager();
   const { formatMessage } = useIntl();
   const { config, loading } = useConfig();
-  const sourcePluginName = '@relate-app%2Fgatsby-source-strapi';
+  const sourcePluginName = 'gatsby-source-strapi';
   const type = layout?.info?.displayName;
   const { id, updatedAt } =  modifiedData;
   const manifestId = `${type}-${id}-${updatedAt}`;
