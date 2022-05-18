@@ -24,10 +24,10 @@ const triggerPreview = throttle(1000, strapi => {
 
 module.exports = ({ strapi }) => {
   const { config } = strapi.plugin('gatsby-cloud');
-  const enabledTypes = [...config('collectionTypes'), ...config('singleTypes'), ...config('uploads') ? ['File'] : []];
+  const enabledTypes = [...config('collectionTypes'), ...config('singleTypes'), ...config('uploads') ? ['plugin::upload.file'] : []];
   
-  const types = Object.values(strapi?.contentTypes)
-    .filter(type => enabledTypes.includes(type.info.displayName))
+  const uids = Object.values(strapi?.contentTypes)
+    .filter(type => enabledTypes.includes(type.uid))
     .map(type => type.uid);
 
   // bootstrap phase
@@ -40,8 +40,7 @@ module.exports = ({ strapi }) => {
       case 'afterUpdateMany':
       case 'afterDelete':
       case 'afterDeleteMany':
-        const uid = event.model.uid;
-        if (types.includes(uid)) {
+        if (uids.includes(event.model.uid)) {
           triggerPreview(strapi);
           if (typeof event?.result?.publishedAt === 'string') {
             triggerBuild(strapi);
