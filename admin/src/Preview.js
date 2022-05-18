@@ -28,10 +28,10 @@ const Preview = () => {
   const { formatMessage } = useIntl();
   const { config, loading } = useConfig();
   const sourcePluginName = 'gatsby-source-strapi';
-  const type = layout?.info?.displayName;
+  const uid = layout?.info?.uid;
   const { id, updatedAt } =  modifiedData;
-  const manifestId = `${type}-${id}-${updatedAt}`;
-  const contentId = `${type}-${id}`;
+  const manifestId = `${uid}-${id}-${updatedAt}`;
+  const contentId = `${uid}-${id}`;
   const url = `${config?.contentSyncUrl}/${sourcePluginName}/${manifestId}/${contentId}`;
 
   return (
