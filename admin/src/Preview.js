@@ -28,7 +28,7 @@ const Preview = () => {
   const { formatMessage } = useIntl();
   const { config, loading } = useConfig();
   const sourcePluginName = 'gatsby-source-strapi';
-  const uid = layout?.info?.uid;
+  const uid = layout?.uid;
   const { id, updatedAt } =  modifiedData;
   const manifestId = `${uid}-${id}-${updatedAt}`;
   const contentId = `${uid}-${id}`;
